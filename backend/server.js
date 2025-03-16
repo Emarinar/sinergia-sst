@@ -12,7 +12,7 @@ const reportesRoutes = require("./routes/reportes");
 const auditoriasRoutes = require("./routes/auditorias");
 const capacitacionesRoutes = require("./routes/capacitaciones");
 const plantillasRoutes = require("./routes/plantillas");
-// Importar la nueva ruta para documentos de empleados
+// Nueva ruta para documentos de empleados
 const empleadosDocumentosRoutes = require("./routes/empleadosDocumentos");
 
 const app = express();
@@ -28,16 +28,12 @@ app.use("/uploads", express.static("uploads"));
 app.use("/api/usuarios", usuariosRoutes);
 app.use("/api/empresas", empresasRoutes);
 app.use("/api/empleados", empleadosRoutes);
+app.use("/api/empleados/documentos", empleadosDocumentosRoutes);
 app.use("/api/plantillas", plantillasRoutes);
-// Nota: Si "empleadosRoutes" ya está montado en "/api/empleados",
-// asegúrate de que la nueva ruta no genere conflicto. Puedes cambiar el prefijo, por ejemplo:
-// app.use("/api/empleados", empleadosRoutes);
-// app.use("/api/empleados", empleadosDocumentosRoutes);
 app.use("/api/documentos", documentosRoutes);
 app.use("/api/reportes", reportesRoutes);
 app.use("/api/auditorias", auditoriasRoutes);
 app.use("/api/capacitaciones", capacitacionesRoutes);
-app.use("/api/empleados", empleadosDocumentosRoutes);
 
 app.get("/", (req, res) => {
   res.send("Backend en funcionamiento");

@@ -1,5 +1,5 @@
-// db.js
-const sql = require("mssql");
+// backend/db.js
+const sql = require('mssql');
 
 const config = {
   user: "node_user",
@@ -7,17 +7,24 @@ const config = {
   server: "localhost", // e.g., localhost\\SQLEXPRESS
   database: "SinergiaSGI",
   options: {
-    encrypt: false, // O true si usas Azure
-    trustServerCertificate: true,
+    encrypt: false,                // Cambia a true si tu entorno lo requiere (por ejemplo, Azure)
+    trustServerCertificate: true,  // Para desarrollo local
   },
 };
 
-sql.connect(config, (err) => {
-  if (err) {
-    console.error("Error de conexión a SQL Server:", err);
-  } else {
-    console.log("Conectado a SQL Server");
-  }
-});
+const poolPromise = new sql.ConnectionPool(config)
+  .connect()
+  .then(pool => {
+    console.log('Conectado a SQL Server');
+    return pool;
+  })
+  .catch(err => {
+    console.error('Error de conexión a SQL Server:', err);
+    process.exit(1);
+  });
 
-module.exports = sql;
+module.exports = {
+  sql,
+  poolPromise,
+};
+
