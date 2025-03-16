@@ -1,0 +1,19 @@
+# Ignorar node_modules y dependencias generadas
+node_modules/
+package-lock.json
+
+# Archivos de entorno
+.env
+
+# Archivos de logs
+logs/
+*.log
+
+# Caché del editor de código
+.vscode/
+.idea/
+.DS_Store
+
+# Archivos de compilación
+dist/
+build/
