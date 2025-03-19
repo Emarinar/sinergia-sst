@@ -1,14 +1,17 @@
+// backend/routes/empleadosDocumentos.js
 const express = require("express");
 const router = express.Router();
 const empleadosDocumentosController = require("../controllers/empleadosDocumentosController");
 const authMiddleware = require("../middlewares/authMiddleware");
 
-// Rutas existentes para empleados
-router.get("/documentos/:employeeId", authMiddleware.verifyToken, empleadosDocumentosController.obtenerDocumentosEmpleado);
-router.post("/documentos", authMiddleware.verifyToken, empleadosDocumentosController.subirDocumentoEmpleado);
+// Ruta para obtener documentos de un empleado
+router.get("/:employeeId", authMiddleware.verifyToken, empleadosDocumentosController.obtenerDocumentosEmpleado);
 
-// Nuevas rutas para aprobar/rechazar documentos de empleados
-router.put("/documentos/aprobar/:id", authMiddleware.verifyToken, empleadosDocumentosController.aprobarDocumentoEmpleado);
-router.put("/documentos/rechazar/:id", authMiddleware.verifyToken, empleadosDocumentosController.rechazarDocumentoEmpleado);
+// Ruta para subir un documento de un empleado
+router.post("/", authMiddleware.verifyToken, empleadosDocumentosController.subirDocumentoEmpleado);
+
+// Rutas para aprobar y rechazar documentos de empleados
+router.put("/aprobar/:id", authMiddleware.verifyToken, empleadosDocumentosController.aprobarDocumentoEmpleado);
+router.put("/rechazar/:id", authMiddleware.verifyToken, empleadosDocumentosController.rechazarDocumentoEmpleado);
 
 module.exports = router;

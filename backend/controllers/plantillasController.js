@@ -2,8 +2,7 @@
 const { poolPromise } = require("../db");
 const puppeteer = require("puppeteer");
 
-// Listar todas las plantillas
-exports.listarPlantillas = async (req, res) => {
+async function listarPlantillas(req, res) {
   try {
     const pool = await poolPromise;
     const result = await pool.request().query("SELECT * FROM Plantillas");
@@ -12,10 +11,9 @@ exports.listarPlantillas = async (req, res) => {
     console.error("Error al listar plantillas:", error);
     res.status(500).json({ error: "Error al listar plantillas." });
   }
-};
+}
 
-// Crear una nueva plantilla
-exports.crearPlantilla = async (req, res) => {
+async function crearPlantilla(req, res) {
   const { nombre, contenido, logo, empresaID } = req.body;
   try {
     const pool = await poolPromise;
@@ -24,20 +22,20 @@ exports.crearPlantilla = async (req, res) => {
     request.input("contenido", contenido);
     request.input("logo", logo);
     request.input("empresaID", empresaID);
-    const result = await request.query(`
+    const query = `
       INSERT INTO Plantillas (Nombre, Contenido, Logo, EmpresaID, CreatedAt, UpdatedAt)
       OUTPUT INSERTED.*
       VALUES (@nombre, @contenido, @logo, @empresaID, GETDATE(), GETDATE())
-    `);
+    `;
+    const result = await request.query(query);
     res.json({ plantilla: result.recordset[0] });
   } catch (error) {
     console.error("Error al crear plantilla:", error);
     res.status(500).json({ error: "Error al crear plantilla." });
   }
-};
+}
 
-// Actualizar una plantilla existente
-exports.actualizarPlantilla = async (req, res) => {
+async function actualizarPlantilla(req, res) {
   const { id } = req.params;
   const { nombre, contenido, logo, empresaID } = req.body;
   try {
@@ -48,7 +46,7 @@ exports.actualizarPlantilla = async (req, res) => {
     request.input("contenido", contenido);
     request.input("logo", logo);
     request.input("empresaID", empresaID);
-    const result = await request.query(`
+    const query = `
       UPDATE Plantillas
       SET Nombre = @nombre,
           Contenido = @contenido,
@@ -57,16 +55,16 @@ exports.actualizarPlantilla = async (req, res) => {
           UpdatedAt = GETDATE()
       WHERE ID = @id;
       SELECT * FROM Plantillas WHERE ID = @id;
-    `);
+    `;
+    const result = await request.query(query);
     res.json({ plantilla: result.recordset[0] });
   } catch (error) {
     console.error("Error al actualizar plantilla:", error);
     res.status(500).json({ error: "Error al actualizar plantilla." });
   }
-};
+}
 
-// Eliminar una plantilla
-exports.eliminarPlantilla = async (req, res) => {
+async function eliminarPlantilla(req, res) {
   const { id } = req.params;
   try {
     const pool = await poolPromise;
@@ -78,10 +76,9 @@ exports.eliminarPlantilla = async (req, res) => {
     console.error("Error al eliminar plantilla:", error);
     res.status(500).json({ error: "Error al eliminar plantilla." });
   }
-};
+}
 
-// Generar PDF a partir de una plantilla
-exports.generarPDF = async (req, res) => {
+async function generarPDF(req, res) {
   const { id } = req.params;
   try {
     const pool = await poolPromise;
@@ -96,7 +93,6 @@ exports.generarPDF = async (req, res) => {
     const plantilla = result.recordset[0];
     const htmlContent = plantilla.Contenido;
 
-    // Usamos Puppeteer para generar el PDF
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.setContent(htmlContent, { waitUntil: "networkidle0" });
@@ -112,4 +108,12 @@ exports.generarPDF = async (req, res) => {
     console.error("Error al generar PDF:", error);
     res.status(500).json({ error: "Error al generar PDF." });
   }
+}
+
+module.exports = {
+  listarPlantillas,
+  crearPlantilla,
+  actualizarPlantilla,
+  eliminarPlantilla,
+  generarPDF,
 };

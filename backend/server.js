@@ -1,4 +1,5 @@
 // backend/server.js
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -12,8 +13,9 @@ const reportesRoutes = require("./routes/reportes");
 const auditoriasRoutes = require("./routes/auditorias");
 const capacitacionesRoutes = require("./routes/capacitaciones");
 const plantillasRoutes = require("./routes/plantillas");
-// Nueva ruta para documentos de empleados
 const empleadosDocumentosRoutes = require("./routes/empleadosDocumentos");
+// Nueva ruta para presupuesto
+const presupuestoRoutes = require("./routes/presupuesto");
 
 const app = express();
 
@@ -34,6 +36,7 @@ app.use("/api/documentos", documentosRoutes);
 app.use("/api/reportes", reportesRoutes);
 app.use("/api/auditorias", auditoriasRoutes);
 app.use("/api/capacitaciones", capacitacionesRoutes);
+app.use("/api/presupuesto", presupuestoRoutes);
 
 app.get("/", (req, res) => {
   res.send("Backend en funcionamiento");

@@ -1,57 +1,79 @@
-// controllers/studyProgramsController.js
-const db = require("../db");
+// backend/controllers/studyProgramsController.js
+const { poolPromise } = require("../db");
 
-exports.listarProgramas = async (req, res) => {
+async function listarStudyPrograms(req, res) {
   try {
-    const result = await db.query("SELECT * FROM StudyPrograms");
+    const pool = await poolPromise;
+    const result = await pool.request().query("SELECT * FROM StudyPrograms");
     res.json(result.recordset);
   } catch (error) {
     console.error("Error al listar programas de estudio:", error);
-    res.status(500).json({ error: "Error al listar programas de estudio" });
+    res.status(500).json({ error: "Error al listar programas de estudio." });
   }
-};
+}
 
-exports.agregarPrograma = async (req, res) => {
-  const { titulo, descripcion, grade } = req.body;
+async function agregarStudyProgram(req, res) {
+  const { nombre, descripcion } = req.body;
   try {
+    const pool = await poolPromise;
+    const request = pool.request();
+    request.input("nombre", nombre);
+    request.input("descripcion", descripcion);
     const query = `
-      INSERT INTO StudyPrograms (titulo, descripcion, grade)
+      INSERT INTO StudyPrograms (Nombre, Descripcion, CreatedAt)
       OUTPUT INSERTED.*
-      VALUES ('${titulo}', '${descripcion}', '${grade || null}')
+      VALUES (@nombre, @descripcion, GETDATE())
     `;
-    const result = await db.query(query);
-    res.json({ programa: result.recordset[0] });
+    const result = await request.query(query);
+    res.json({ studyProgram: result.recordset[0] });
   } catch (error) {
     console.error("Error al agregar programa de estudio:", error);
-    res.status(500).json({ error: "Error al agregar programa de estudio" });
+    res.status(500).json({ error: "Error al agregar programa de estudio." });
   }
-};
+}
 
-exports.actualizarPrograma = async (req, res) => {
+async function actualizarStudyProgram(req, res) {
   const { id } = req.params;
-  const { titulo, descripcion, grade } = req.body;
+  const { nombre, descripcion } = req.body;
   try {
+    const pool = await poolPromise;
+    const request = pool.request();
+    request.input("id", id);
+    request.input("nombre", nombre);
+    request.input("descripcion", descripcion);
     const query = `
       UPDATE StudyPrograms
-      SET titulo='${titulo}', descripcion='${descripcion}', grade='${grade}'
-      WHERE id=${id};
-      SELECT * FROM StudyPrograms WHERE id=${id}
+      SET Nombre = @nombre,
+          Descripcion = @descripcion,
+          UpdatedAt = GETDATE()
+      WHERE ID = @id;
+      SELECT * FROM StudyPrograms WHERE ID = @id;
     `;
-    const result = await db.query(query);
-    res.json({ programa: result.recordset[0] });
+    const result = await request.query(query);
+    res.json({ studyProgram: result.recordset[0] });
   } catch (error) {
     console.error("Error al actualizar programa de estudio:", error);
-    res.status(500).json({ error: "Error al actualizar programa de estudio" });
+    res.status(500).json({ error: "Error al actualizar programa de estudio." });
   }
-};
+}
 
-exports.eliminarPrograma = async (req, res) => {
+async function eliminarStudyProgram(req, res) {
   const { id } = req.params;
   try {
-    await db.query(`DELETE FROM StudyPrograms WHERE id=${id}`);
+    const pool = await poolPromise;
+    const request = pool.request();
+    request.input("id", id);
+    await request.query("DELETE FROM StudyPrograms WHERE ID = @id");
     res.json({ message: "Programa de estudio eliminado correctamente" });
   } catch (error) {
     console.error("Error al eliminar programa de estudio:", error);
-    res.status(500).json({ error: "Error al eliminar programa de estudio" });
+    res.status(500).json({ error: "Error al eliminar programa de estudio." });
   }
+}
+
+module.exports = {
+  listarStudyPrograms,
+  agregarStudyProgram,
+  actualizarStudyProgram,
+  eliminarStudyProgram,
 };

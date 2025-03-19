@@ -1,7 +1,7 @@
 // backend/controllers/reportesController.js
 const { poolPromise } = require("../db");
 
-exports.reporteEmpresas = async (req, res) => {
+async function reporteEmpresas(req, res) {
   try {
     const pool = await poolPromise;
     const result = await pool.request().query("SELECT * FROM Empresas");
@@ -10,9 +10,9 @@ exports.reporteEmpresas = async (req, res) => {
     console.error("Error en reporte de empresas:", error);
     res.status(500).json({ error: "Error en reporte de empresas" });
   }
-};
+}
 
-exports.reporteEmpleados = async (req, res) => {
+async function reporteEmpleados(req, res) {
   try {
     const pool = await poolPromise;
     const result = await pool.request().query("SELECT * FROM Empleados");
@@ -21,9 +21,9 @@ exports.reporteEmpleados = async (req, res) => {
     console.error("Error en reporte de empleados:", error);
     res.status(500).json({ error: "Error en reporte de empleados" });
   }
-};
+}
 
-exports.reporteDocumentos = async (req, res) => {
+async function reporteDocumentos(req, res) {
   try {
     const pool = await poolPromise;
     const result = await pool.request().query("SELECT * FROM Documentos");
@@ -32,4 +32,10 @@ exports.reporteDocumentos = async (req, res) => {
     console.error("Error en reporte de documentos:", error);
     res.status(500).json({ error: "Error en reporte de documentos" });
   }
+}
+
+module.exports = {
+  reporteEmpresas,
+  reporteEmpleados,
+  reporteDocumentos,
 };

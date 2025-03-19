@@ -1,57 +1,82 @@
-// controllers/capacitacionesController.js
-const db = require("../db");
+// backend/controllers/capacitacionesController.js
+const { poolPromise } = require("../db");
 
-exports.listarCapacitaciones = async (req, res) => {
+async function listarCapacitaciones(req, res) {
   try {
-    const result = await db.query("SELECT * FROM Capacitaciones");
+    const pool = await poolPromise;
+    const result = await pool.request().query("SELECT * FROM Capacitaciones");
     res.json(result.recordset);
   } catch (error) {
     console.error("Error al listar capacitaciones:", error);
-    res.status(500).json({ error: "Error al listar capacitaciones" });
+    res.status(500).json({ error: "Error al listar capacitaciones." });
   }
-};
+}
 
-exports.agregarCapacitacion = async (req, res) => {
-  const { titulo, fecha, descripcion, lugar } = req.body;
+async function agregarCapacitacion(req, res) {
+  const { nombre, fecha, descripcion } = req.body;
   try {
+    const pool = await poolPromise;
+    const request = pool.request();
+    request.input("nombre", nombre);
+    request.input("fecha", fecha);
+    request.input("descripcion", descripcion);
     const query = `
-      INSERT INTO Capacitaciones (titulo, fecha, descripcion, lugar)
+      INSERT INTO Capacitaciones (Nombre, Fecha, Descripcion, CreatedAt)
       OUTPUT INSERTED.*
-      VALUES ('${titulo}', '${fecha}', '${descripcion}', '${lugar}')
+      VALUES (@nombre, @fecha, @descripcion, GETDATE())
     `;
-    const result = await db.query(query);
+    const result = await request.query(query);
     res.json({ capacitacion: result.recordset[0] });
   } catch (error) {
     console.error("Error al agregar capacitación:", error);
-    res.status(500).json({ error: "Error al agregar capacitación" });
+    res.status(500).json({ error: "Error al agregar capacitación." });
   }
-};
+}
 
-exports.actualizarCapacitacion = async (req, res) => {
+async function actualizarCapacitacion(req, res) {
   const { id } = req.params;
-  const { titulo, fecha, descripcion, lugar } = req.body;
+  const { nombre, fecha, descripcion } = req.body;
   try {
+    const pool = await poolPromise;
+    const request = pool.request();
+    request.input("id", id);
+    request.input("nombre", nombre);
+    request.input("fecha", fecha);
+    request.input("descripcion", descripcion);
     const query = `
       UPDATE Capacitaciones
-      SET titulo='${titulo}', fecha='${fecha}', descripcion='${descripcion}', lugar='${lugar}'
-      WHERE id=${id};
-      SELECT * FROM Capacitaciones WHERE id=${id}
+      SET Nombre = @nombre,
+          Fecha = @fecha,
+          Descripcion = @descripcion,
+          UpdatedAt = GETDATE()
+      WHERE ID = @id;
+      SELECT * FROM Capacitaciones WHERE ID = @id;
     `;
-    const result = await db.query(query);
+    const result = await request.query(query);
     res.json({ capacitacion: result.recordset[0] });
   } catch (error) {
     console.error("Error al actualizar capacitación:", error);
-    res.status(500).json({ error: "Error al actualizar capacitación" });
+    res.status(500).json({ error: "Error al actualizar capacitación." });
   }
-};
+}
 
-exports.eliminarCapacitacion = async (req, res) => {
+async function eliminarCapacitacion(req, res) {
   const { id } = req.params;
   try {
-    await db.query(`DELETE FROM Capacitaciones WHERE id=${id}`);
+    const pool = await poolPromise;
+    const request = pool.request();
+    request.input("id", id);
+    await request.query("DELETE FROM Capacitaciones WHERE ID = @id");
     res.json({ message: "Capacitación eliminada correctamente" });
   } catch (error) {
     console.error("Error al eliminar capacitación:", error);
-    res.status(500).json({ error: "Error al eliminar capacitación" });
+    res.status(500).json({ error: "Error al eliminar capacitación." });
   }
+}
+
+module.exports = {
+  listarCapacitaciones,
+  agregarCapacitacion,
+  actualizarCapacitacion,
+  eliminarCapacitacion,
 };
