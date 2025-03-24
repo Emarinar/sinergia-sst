@@ -1,4 +1,5 @@
 // backend/controllers/usuariosController.js
+require("dotenv").config();
 const { poolPromise } = require("../db");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -51,7 +52,7 @@ async function login(req, res) {
       .input("correo", correo)
       .query("SELECT * FROM Usuarios WHERE Correo = @correo");
 
-    if (result.recordset.length === 0) {
+    if (!result.recordset || result.recordset.length === 0) {
       return res.status(404).json({ mensaje: "Usuario no encontrado" });
     }
 
@@ -63,7 +64,7 @@ async function login(req, res) {
       return res.status(401).json({ mensaje: "Clave incorrecta" });
     }
 
-    // Genera el token JWT usando la clave secreta desde las variables de entorno
+    // Genera el token JWT usando la clave secreta del .env (SECRET_KEY)
     const token = jwt.sign(
       { id: usuario.ID, rol: usuario.Rol, empresaID: usuario.EmpresaID },
       process.env.SECRET_KEY,

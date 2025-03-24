@@ -2,12 +2,13 @@
 const express = require("express");
 const router = express.Router();
 const usuariosController = require("../controllers/usuariosController");
+const authMiddleware = require("../middlewares/authMiddleware");
 
-// Asegúrate de que las funciones estén correctamente exportadas en usuariosController.js
-router.get("/", usuariosController.listarUsuarios);
+// Rutas para usuarios
+router.get("/", authMiddleware.verifyToken, usuariosController.listarUsuarios);
 router.post("/register", usuariosController.registrarUsuario);
-router.post("/login", usuariosController.login); // Si tienes login
-router.put("/:id", usuariosController.actualizarUsuario);
-router.delete("/:id", usuariosController.eliminarUsuario);
+router.post("/login", usuariosController.login);
+router.put("/:id", authMiddleware.verifyToken, usuariosController.actualizarUsuario);
+router.delete("/:id", authMiddleware.verifyToken, usuariosController.eliminarUsuario);
 
 module.exports = router;
