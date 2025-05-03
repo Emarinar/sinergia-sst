@@ -1,0 +1,62 @@
+/* public/template.css */
+
+/* Variables de color */
+:root {
+    --primary-bg: #0f2027;
+    --secondary-bg: #203a43;
+    --tertiary-bg: #2c5364;
+    --text-color: #f8f9fa;
+    --accent-color: #4ade80;
+    --header-bg: #495057;
+  }
+  
+  /* Estilos base */
+  body {
+    margin: 0;
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+    background: var(--primary-bg);
+    color: var(--text-color);
+  }
+  
+  /* Encabezados */
+  h1, h2, h3, h4, h5 {
+    color: var(--accent-color);
+    margin: 0 0 1rem;
+  }
+  
+  /* Tablas dentro de plantillas */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  }
+  thead {
+    background: var(--header-bg);
+  }
+  thead th {
+    padding: 0.75rem;
+    text-align: left;
+    color: var(--text-color);
+  }
+  tbody td {
+    padding: 0.5rem;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  /* Imágenes responsivas */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* Otros componentes personalizados */
+  .btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--accent-color);
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  
