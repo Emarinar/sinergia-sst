@@ -1,0 +1,83 @@
+/* src/components/Plantillas/Plantillas.css */
+
+:root {
+  --primary-bg: #0f2027;
+  --secondary-bg: #203a43;
+  --tertiary-bg: #2c5364;
+  --text-color: #f8f9fa;
+  --accent-color: #4ade80;
+  --table-bg: #343a40;
+  --header-bg: #495057;
+  --hover-bg: #3a3a3a;
+}
+
+.plantillas-container {
+  background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg), var(--tertiary-bg));
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  color: var(--text-color);
+  width: 100%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.section-title {
+  color: var(--accent-color);
+}
+
+.input-group .form-control {
+  border-radius: 4px;
+}
+
+.btn-success {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+}
+
+.plantillas-table {
+  background-color: var(--table-bg);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.plantillas-table th,
+.plantillas-table td {
+  vertical-align: middle;
+  color: var(--text-color);
+}
+
+.plantillas-table thead {
+  background-color: var(--header-bg);
+}
+
+.plantillas-table thead th {
+  padding: 10px;
+  font-size: 0.9rem;
+}
+
+.plantillas-table tbody tr {
+  transition: background-color 0.3s ease;
+}
+
+.plantillas-table tbody tr:hover {
+  background-color: var(--hover-bg);
+}
+
+.plantillas-table tbody td {
+  padding: 10px;
+  font-size: 0.85rem;
+}
+
+.actions-cell .btn {
+  margin-right: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.loading-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}

@@ -1,0 +1,16 @@
+.empresas-container {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .table th,
+  .table td {
+    vertical-align: middle;
+  }
+  
+  h2 {
+    font-family: "Roboto", sans-serif;
+  }
+  

@@ -1,0 +1,107 @@
+/* src/components/Formularios/Formularios.css */
+
+/* Variables */
+:root {
+    --primary-bg: #0f2027;
+    --secondary-bg: #203a43;
+    --tertiary-bg: #2c5364;
+    --text-color: #f8f9fa;
+    --accent-color: #4ade80;
+    --table-bg: #343a40;
+    --header-bg: #495057;
+    --hover-bg: #3a3a3a;
+  }
+  
+  /* Contenedor general */
+  .formularios-container {
+    background: linear-gradient(135deg, var(--primary-bg), var(--secondary-bg), var(--tertiary-bg));
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    color: var(--text-color);
+  }
+  
+  /* Sección de sincronización */
+  .sync-account {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para el listado de formularios */
+  .formularios-list {
+    margin-top: 20px;
+  }
+  
+  .formularios-list h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: var(--accent-color);
+  }
+  
+  /* Estilos generales para los formularios y el iframe */
+  .integrar-formulario {
+    margin-top: 20px;
+  }
+  
+  .integrar-formulario h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: var(--accent-color);
+  }
+  
+  /* Formularios de creación */
+  .crear-formulario {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .crear-formulario .form-label {
+    color: var(--text-color);
+  }
+  
+  /* Estilos para las tablas (puedes personalizarlos según lo necesites) */
+  .table {
+    background-color: var(--table-bg);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  thead tr {
+    background-color: var(--header-bg);
+  }
+  
+  thead th {
+    color: var(--text-color);
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+  
+  tbody tr {
+    transition: background-color 0.3s ease;
+  }
+  
+  tbody tr:hover {
+    background-color: var(--hover-bg);
+  }
+  
+  tbody td {
+    padding: 10px;
+    font-size: 0.85rem;
+    color: var(--text-color);
+  }
+  
+  /* Mensaje cuando no hay formulario seleccionado */
+  .no-form-message {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-color);
+  }
+  
+  /* Contenedor de carga para spinners */
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+  }
+  

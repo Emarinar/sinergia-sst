@@ -1,0 +1,46 @@
+/* src/components/UI/NavigationBar.css */
+.navigation-container {
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  padding: 0 1rem;
+}
+
+/* Aumentamos el tamaño del logo y le añadimos sombra para resaltar */
+.logo-img {
+  width: 150px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.logo-img:hover {
+  transform: scale(1.05);
+}
+
+.platform-name {
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.nav-icon {
+  color: #4ade80;
+  font-size: 30px;
+  transition: transform 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-icon:hover {
+  transform: scale(1.15);
+  color: #22c55e;
+}
+
+.logout-button {
+  border: none;
+  background: transparent;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.logout-button:hover {
+  transform: scale(1.15);
+  color: #ef4444;
+}

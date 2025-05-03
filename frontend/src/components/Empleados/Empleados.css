@@ -1,0 +1,122 @@
+/* src/components/Empleados/Empleados.css */
+
+/* Contenedor general */
+.empleados-container {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    color: #f8f9fa;
+  }
+  
+  /* Título principal */
+  .empleados-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #4ade80; /* Verde para destacar */
+  }
+  
+  /* Estilos para la tabla */
+  .empleados-container table {
+    margin-top: 20px;
+    background-color: #343a40;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .empleados-container thead tr {
+    background-color: #495057;
+  }
+  
+  .empleados-container thead th {
+    color: #f8f9fa;
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+  
+  .empleados-container tbody tr {
+    transition: background-color 0.3s ease;
+  }
+  
+  .empleados-container tbody tr:hover {
+    background-color: #3a3a3a;
+  }
+  
+  .empleados-container tbody td {
+    padding: 10px;
+    font-size: 0.85rem;
+    color: #f8f9fa;
+  }
+  
+  /* Botones personalizados */
+  .empleados-container .btn-success {
+    background-color: #28a745;
+    border: none;
+    transition: background-color 0.2s;
+  }
+  
+  .empleados-container .btn-success:hover {
+    background-color: #218838;
+  }
+  
+  .empleados-container .btn-warning {
+    background-color: #ffc107;
+    border: none;
+    transition: background-color 0.2s;
+  }
+  
+  .empleados-container .btn-warning:hover {
+    background-color: #e0a800;
+  }
+  
+  .empleados-container .btn-danger {
+    background-color: #dc3545;
+    border: none;
+    transition: background-color 0.2s;
+  }
+  
+  .empleados-container .btn-danger:hover {
+    background-color: #c82333;
+  }
+  
+  /* Estilos para el InputGroup y FormControl */
+  .empleados-container .input-group .form-control {
+    border-radius: 0.25rem;
+    background-color: #495057;
+    border: 1px solid #6c757d;
+    color: #f8f9fa;
+  }
+  
+  .empleados-container .input-group .form-control::placeholder {
+    color: #ced4da;
+  }
+  
+  /* Modal personalizado */
+  .empleados-container .modal-header {
+    background-color: #343a40;
+    color: #f8f9fa;
+    border-bottom: 1px solid #6c757d;
+  }
+  
+  .empleados-container .modal-body {
+    background-color: #495057;
+    color: #f8f9fa;
+  }
+  
+  .empleados-container .modal-footer {
+    background-color: #343a40;
+    border-top: 1px solid #6c757d;
+  }
+  
+  /* Ajustes para formularios dentro del modal */
+  .empleados-container form .form-control {
+    background-color: #6c757d;
+    color: #f8f9fa;
+    border: 1px solid #adb5bd;
+  }
+  
+  .empleados-container form .form-label {
+    color: #f8f9fa;
+  }
+  

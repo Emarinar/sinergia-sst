@@ -1,0 +1,64 @@
+/* Estilos para el módulo de Formularios */
+
+.formularios-container {
+  background-color: #1f2937;
+  padding: 1.5rem;
+  border-radius: 8px;
+  color: #f8f9fa;
+}
+
+.formularios-container h2,
+.formularios-container h4 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #4ade80;
+}
+
+/* Contenedores para cada sección */
+.crear-formulario-container,
+.vista-previa-formulario-container,
+.respuestas-formulario-container {
+  background-color: #374151;
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+/* Formularios y controles */
+.form-label,
+.input-group-text {
+  color: #f8f9fa;
+}
+
+.form-control {
+  background-color: #475569;
+  border: 1px solid #4b5563;
+  color: #f8f9fa;
+}
+
+.form-control::placeholder {
+  color: #9ca3af;
+}
+
+.btn-primary {
+  background-color: #4ade80;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #3ac162;
+}
+
+/* Tablas */
+.table-dark {
+  background-color: #374151;
+}
+
+.table-dark th,
+.table-dark td {
+  color: #f8f9fa;
+}
+
+.table-dark thead tr {
+  background-color: #4b5563;
+}

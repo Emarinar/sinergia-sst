@@ -1,0 +1,103 @@
+/* Estilos generales para el módulo Documentos */
+
+.documentos-container {
+    background-color: #1f2937;
+    padding: 1.5rem;
+    border-radius: 8px;
+    color: #f8f9fa;
+  }
+  
+  .documentos-container h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #4ade80;
+  }
+  
+  .documentos-container p {
+    color: #cbd5e1;
+  }
+  
+  /* Formularios y controles */
+  .documentos-container .form-label {
+    color: #f8f9fa;
+  }
+  
+  .documentos-container .form-control {
+    background-color: #374151;
+    border: 1px solid #4b5563;
+    color: #f8f9fa;
+  }
+  
+  .documentos-container .form-control::placeholder {
+    color: #9ca3af;
+  }
+  
+  /* Botones */
+  .documentos-container .btn-primary {
+    background-color: #4ade80;
+    border: none;
+  }
+  
+  .documentos-container .btn-primary:hover {
+    background-color: #3ac162;
+  }
+  
+  .documentos-container .btn-danger {
+    background-color: #ef4444;
+    border: none;
+  }
+  
+  .documentos-container .btn-danger:hover {
+    background-color: #dc2626;
+  }
+  
+  /* Tablas */
+  .documentos-container table {
+    background-color: #374151;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  
+  .documentos-container thead tr {
+    background-color: #4b5563;
+  }
+  
+  .documentos-container thead th {
+    color: #f8f9fa;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+  }
+  
+  .documentos-container tbody tr {
+    transition: background-color 0.3s ease;
+  }
+  
+  .documentos-container tbody tr:hover {
+    background-color: #475569;
+  }
+  
+  .documentos-container tbody td {
+    padding: 0.75rem;
+    font-size: 0.85rem;
+    color: #f8f9fa;
+  }
+  
+  /* InputGroup */
+  .documentos-container .input-group .form-control {
+    background-color: #374151;
+    border: 1px solid #4b5563;
+    color: #f8f9fa;
+  }
+  
+  /* Modal */
+  .documentos-container .modal-header,
+  .documentos-container .modal-footer {
+    background-color: #374151;
+    color: #f8f9fa;
+  }
+  
+  .documentos-container .modal-body {
+    background-color: #4b5563;
+    color: #f8f9fa;
+  }
+  
